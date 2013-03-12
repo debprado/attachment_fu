@@ -359,7 +359,7 @@ module Technoweenie # :nodoc:
       # it's not needed anymore.  The collection is cleared after saving the attachment.
       def temp_path
           p = temp_paths.first
-          if p.is_a?(ActionDispatch::Http::UploadedFile) # Rails 3.0.3 compatability fix
+          if defined?(ActionDispatch::Http::UploadedFile) && p.is_a?(ActionDispatch::Http::UploadedFile) # Rails 3.0.3 compatability fix
             p.tempfile.path
           else
             p.respond_to?(:path) ? p.path : p.to_s
